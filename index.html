@@ -1,0 +1,1862 @@
+﻿<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atiana Ali Munawar | Portofolio Interaktif</title>
+    <!-- Google Fonts: Plus Jakarta Sans & Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Remix Icon untuk Ikon Modern -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <style>
+        /* ==========================================
+           1. CSS VARIABLES & LIQUID GLASS THEME
+           ========================================== */
+        :root[data-theme="dark"] {
+            --bg-base: #070913;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-1: #38bdf8;
+            --accent-2: #818cf8;
+            --accent-3: #c084fc;
+            
+            /* Liquid Glass Properties - Dark */
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-bg-hover: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-highlight: rgba(255, 255, 255, 0.25);
+            --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+            --nav-bg: rgba(10, 14, 28, 0.55);
+            --blob-opacity: 0.45;
+        }
+
+        :root[data-theme="light"] {
+            --bg-base: #eef2ff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent-1: #0284c7;
+            --accent-2: #4f46e5;
+            --accent-3: #9333ea;
+            
+            /* Liquid Glass Properties - Light */
+            --glass-bg: rgba(255, 255, 255, 0.45);
+            --glass-bg-hover: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.75);
+            --glass-highlight: rgba(255, 255, 255, 0.95);
+            --glass-shadow: 0 20px 40px rgba(31, 38, 135, 0.1), inset 0 2px 3px rgba(255, 255, 255, 0.8);
+            --nav-bg: rgba(255, 255, 255, 0.6);
+            --blob-opacity: 0.65;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+        }
+
+        a, button, input, textarea, .liquid-glass, .filter-btn, .theme-toggle, .mobile-menu-btn {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        a:focus, button:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            position: relative;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        body::-webkit-scrollbar,
+        html::-webkit-scrollbar {
+            width: 0 !important;
+            height: 0 !important;
+            display: none !important;
+        }
+        html, body {
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* ==========================================
+           2. ANIMATED LIQUID BACKGROUND BLOBS (GPU OPTIMIZED)
+           ========================================== */
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: var(--blob-opacity);
+            animation: floatLiquid 18s infinite alternate ease-in-out;
+            transition: opacity 0.5s ease;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+        }
+
+        .blob-1 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            top: -10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            width: 450px;
+            height: 450px;
+            background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+            bottom: -15%;
+            right: -5%;
+            animation-delay: -5s;
+            animation-duration: 22s;
+        }
+
+        .blob-3 {
+            width: 350px;
+            height: 350px;
+            background: linear-gradient(135deg, #ec4899, var(--accent-1));
+            top: 40%;
+            left: 50%;
+            animation-delay: -10s;
+            animation-duration: 25s;
+        }
+
+        @keyframes floatLiquid {
+            0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate3d(45px, -35px, 0) scale(1.08) rotate(35deg); }
+            100% { transform: translate3d(-35px, 40px, 0) scale(0.95) rotate(70deg); }
+        }
+
+        /* ==========================================
+           3. CORE LIQUID GLASS UTILITY CLASS
+           ========================================== */
+        .liquid-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: var(--glass-shadow);
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                        background 0.4s ease, 
+                        border-color 0.4s ease;
+        }
+
+        .liquid-glass::before {
+            content: "";
+            position: absolute;
+            top: var(--mouse-y, -500px);
+            left: var(--mouse-x, -500px);
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--glass-highlight) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .liquid-glass:hover::before {
+                opacity: 0.4;
+            }
+        }
+
+        .liquid-glass > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==========================================
+           4. FLOATING LIQUID NAVBAR
+           ========================================== */
+        header {
+            position: fixed;
+            top: 16px;
+            left: 50%;
+            transform: translate3d(-50%, 0, 0);
+            width: fit-content;
+            max-width: 90vw;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            padding: 6px 14px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            box-shadow: var(--glass-shadow);
+            transform: translate3d(0, 0, 0);
+        }
+
+        .logo {
+            font-size: 1.18rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.88rem;
+            padding: 6px 14px;
+            border-radius: 50px;
+            transition: background 0.3s ease, color 0.3s ease;
+            user-select: none;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+            background: var(--glass-bg-hover);
+            box-shadow: inset 0 1px 1px var(--glass-highlight);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theme-toggle {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: inset 0 1px 2px var(--glass-highlight);
+            user-select: none;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(20deg) scale(1.08);
+            background: var(--glass-bg-hover);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* ==========================================
+           5. LAYOUT & SECTIONS
+           ========================================== */
+        main {
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        section {
+            padding: 110px 0 60px;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-1);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        /* ==========================================
+           6. HOME / HERO SECTION
+           ========================================== */
+        .hero-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: stretch;
+            margin-top: 40px;
+        }
+
+        .hero-card {
+            flex: 1 1 540px;
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            align-self: flex-start;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #10b981;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.5; }
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .typewriter-container {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            min-height: 35px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: var(--accent-1);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .hero-desc {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 32px;
+            font-size: 1.05rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            font-size: 0.95rem;
+            border: 1px solid var(--glass-border);
+            user-select: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: #fff;
+            border: none;
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.5);
+        }
+
+        .btn-glass {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+        }
+
+        .btn-glass:hover {
+            background: var(--glass-bg-hover);
+            transform: translateY(-3px);
+        }
+
+        /* Hero Visual Right Card with Photo Frame */
+        .hero-visual {
+            flex: 1 1 320px;
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* === Avatar Profile Border === */
+        .avatar-wrapper {
+            position: relative;
+            width: 190px;
+            height: 190px;
+            margin-bottom: 24px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            overflow: visible;
+        }
+        /* Spinning conic ring */
+        .avatar-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from var(--ring-angle, 0deg),
+                var(--accent-1),
+                var(--accent-2),
+                var(--accent-3),
+                #ec4899,
+                var(--accent-1)
+            );
+            animation: ringRotate 3s linear infinite;
+            z-index: 0;
+        }
+        /* Mask to make ring hollow */
+        .avatar-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 5px;
+            background: var(--bg-base);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .avatar-sphere {
+            position: absolute;
+            inset: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow:
+                0 0 22px rgba(56, 189, 248, 0.5),
+                0 0 44px rgba(129, 140, 248, 0.25),
+                inset 0 4px 12px rgba(255,255,255,0.18);
+            z-index: 2;
+        }
+        @keyframes ringRotate {
+            to { --ring-angle: 360deg; }
+        }
+        @property --ring-angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+        .avatar-sphere img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.4s ease;
+        }
+        .avatar-wrapper:hover .avatar-sphere img,
+        .avatar-wrapper:focus-within .avatar-sphere img {
+            opacity: 0;
+        }
+        .avatar-spiderman {
+            position: absolute;
+            inset: 8px;
+            width: calc(100% - 16px);
+            height: calc(100% - 16px);
+            border-radius: 50%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 3;
+            pointer-events: none;
+        }
+        .avatar-wrapper:hover .avatar-spiderman,
+        .avatar-wrapper:focus-within .avatar-spiderman {
+            opacity: 1;
+        }
+        /* Dot orbit animation */
+        .avatar-orbit {
+            position: absolute;
+            inset: -18px;
+            border-radius: 50%;
+            animation: orbitSpin 5s linear infinite;
+            z-index: 3;
+            pointer-events: none;
+        }
+        .avatar-orbit::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-1);
+            box-shadow: 0 0 8px var(--accent-1);
+            transform: translateY(-50%);
+        }
+        .avatar-orbit::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -5px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent-3);
+            box-shadow: 0 0 8px var(--accent-3);
+            transform: translateY(-50%);
+        }
+        @keyframes orbitSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        .quick-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .stat-box {
+            flex: 1 1 calc(50% - 6px);
+            min-width: 120px;
+            padding: 14px;
+            border-radius: 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+        }
+
+        .stat-box h4 {
+            font-size: 1.25rem;
+            color: var(--accent-1);
+        }
+
+        .stat-box p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* ==========================================
+           7. ABOUT SECTION (INTERACTIVE CARDS & TIMELINE)
+           ========================================== */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .bento-item {
+            position: relative;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+            cursor: default;
+        }
+
+        .bento-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            transition: left 0.6s ease;
+            pointer-events: none;
+        }
+
+        .bento-item:hover::before {
+            left: 100%;
+        }
+
+        .bento-item:hover {
+            transform: translateY(-8px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 16px 40px rgba(56, 189, 248, 0.15);
+        }
+
+        .bento-wide {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 768px) {
+            .bento-wide {
+                grid-column: span 1;
+            }
+        }
+
+        .bento-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(129, 140, 248, 0.2));
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--accent-1);
+            margin-bottom: 20px;
+            transition: transform 0.4s ease, background 0.4s ease;
+        }
+
+        .bento-item:hover .bento-icon {
+            transform: rotate(12deg) scale(1.1);
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .bento-item h3 {
+            font-size: 1.35rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bento-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.98rem;
+        }
+
+        /* Interactive Tags on About */
+        .about-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .about-tag {
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .about-tag:hover {
+            background: var(--accent-1);
+            color: #fff;
+            transform: scale(1.06);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Interactive Timeline in About Section */
+        .timeline-interactive {
+            position: relative;
+            padding-left: 24px;
+            border-left: 2px dashed rgba(56, 189, 248, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 16px;
+        }
+
+        .timeline-interactive-item {
+            position: relative;
+            padding: 12px 16px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .timeline-interactive-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 18px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-1);
+            box-shadow: 0 0 10px var(--accent-1);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .timeline-interactive-item:hover {
+            transform: translateX(8px);
+            background: var(--glass-bg-hover);
+            border-color: var(--accent-1);
+        }
+
+        .timeline-interactive-item:hover::before {
+            transform: scale(1.4);
+            background: #ec4899;
+            box-shadow: 0 0 14px #ec4899;
+        }
+
+        /* ==========================================
+           8. SKILLS SECTION
+           ========================================== */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .skill-category {
+            flex: 1 1 320px;
+            padding: 32px;
+        }
+
+        .skill-category h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+            font-size: 1.25rem;
+        }
+
+        .skill-item {
+            margin-bottom: 18px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.92rem;
+            font-weight: 500;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(148, 163, 184, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+            border-radius: 20px;
+            width: 0;
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+        }
+
+        /* ==========================================
+           9. PROJECTS SECTION
+           ========================================== */
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 22px;
+            border-radius: 50px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+            font-family: inherit;
+            user-select: none;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 26px;
+        }
+
+        .project-card {
+            width: 100%;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card.hide {
+            display: none;
+        }
+
+        .project-thumb {
+            height: 170px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 50px;
+            background: var(--glass-bg-hover);
+            border: 1px solid var(--glass-border);
+            color: var(--accent-1);
+            font-weight: 600;
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: gap 0.3s ease;
+            user-select: none;
+        }
+
+        .project-link:hover {
+            gap: 12px;
+            color: var(--accent-1);
+        }
+
+        /* ==========================================
+           10. CONTACT SECTION
+           ========================================== */
+        .contact-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .contact-info {
+            flex: 1 1 340px;
+            padding: 40px;
+        }
+
+        .contact-form {
+            flex: 1.3 1 420px;
+            padding: 40px;
+        }
+
+        .contact-list {
+            margin-top: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            border-radius: 14px;
+            background: var(--glass-bg-hover);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--accent-1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .glass-input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 14px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .glass-input:focus {
+            border-color: var(--accent-1);
+            background: var(--glass-bg-hover);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
+        textarea.glass-input {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================
+           11. OPTIMASI MOBILE
+           ========================================== */
+        .porto-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+        .porto-tab-btn {
+            padding: 10px 28px;
+            border-radius: 50px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            font-family: inherit;
+            font-size: 0.95rem;
+            user-select: none;
+        }
+        .porto-tab-btn.active, .porto-tab-btn:hover {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3);
+        }
+        .porto-tab-panel {
+            display: none;
+        }
+        .porto-tab-panel.active {
+            display: block;
+            animation: fadeInTab 0.35s ease forwards;
+        }
+        @keyframes fadeInTab {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .cert-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+        }
+        .cert-modal.open {
+            display: flex;
+        }
+        .cert-modal img {
+            max-width: 88vw;
+            max-height: 85vh;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+        /* Scroll reveal with per-element stagger */
+        .reveal {
+            opacity: 0;
+            transform: translate3d(0, 28px, 0) scale(0.98);
+            transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.2, 0.75, 0.3, 1);
+            transition-delay: var(--reveal-delay, 0ms);
+            will-change: opacity, transform;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1);
+        }
+        .reveal.reveal-left { transform: translate3d(-28px, 0, 0) scale(0.98); }
+        .reveal.reveal-right { transform: translate3d(28px, 0, 0) scale(0.98); }
+        .reveal.reveal-left.active,
+        .reveal.reveal-right.active { transform: translate3d(0, 0, 0) scale(1); }
+        .project-card, .skill-item, .bento-item, .contact-item, .porto-tab-btn, .filter-btn {
+            transition: transform 0.28s ease, box-shadow 0.28s ease, background-color 0.28s ease;
+        }
+        .project-card:hover, .skill-item:hover, .bento-item:hover, .contact-item:hover {
+            transform: translateY(-6px);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal,
+            .reveal.active {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+        @media (max-width: 900px) {
+            :root[data-theme="dark"] {
+                --glass-bg: rgba(15, 23, 42, 0.68);
+                --nav-bg: rgba(10, 14, 28, 0.85);
+            }
+            :root[data-theme="light"] {
+                --glass-bg: rgba(255, 255, 255, 0.75);
+                --nav-bg: rgba(255, 255, 255, 0.88);
+            }
+
+            header {
+                width: calc(100% - 24px);
+                max-width: 560px;
+                top: 12px;
+            }
+            .navbar {
+                width: 100%;
+                justify-content: space-between;
+                gap: 4px;
+                padding: 6px 8px;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+            }
+
+            .liquid-glass {
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), inset 0 1px 1px var(--glass-border);
+            }
+
+            .liquid-glass::before {
+                display: none;
+            }
+
+            .blob {
+                filter: none;
+                will-change: auto;
+                animation-duration: 28s;
+            }
+            .blob-1 {
+                width: 340px;
+                height: 340px;
+                background: radial-gradient(circle, var(--accent-1) 0%, transparent 70%);
+            }
+            .blob-2 {
+                width: 320px;
+                height: 320px;
+                background: radial-gradient(circle, var(--accent-3) 0%, transparent 70%);
+            }
+            .blob-3 {
+                width: 280px;
+                height: 280px;
+                background: radial-gradient(circle, var(--accent-2) 0%, transparent 70%);
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-card, .hero-visual, .bento-item, .bento-wide, .skill-category, .project-card, .contact-info, .contact-form {
+                flex: 1 1 100%;
+                padding: 28px 22px;
+            }
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .typewriter-container {
+                font-size: 1.1rem;
+            }
+            .nav-links {
+                display: flex;
+                flex-direction: row;
+                position: static;
+                background: transparent;
+                backdrop-filter: none;
+                border: none;
+                padding: 0;
+                box-shadow: none;
+                gap: 2px;
+                flex: 1;
+                justify-content: space-evenly;
+            }
+            .nav-links li {
+                width: auto;
+            }
+            .nav-links a {
+                padding: 6px 8px;
+                font-size: 0.78rem;
+                white-space: nowrap;
+            }
+            .theme-toggle {
+                width: 32px;
+                height: 32px;
+                font-size: 0.95rem;
+                flex-shrink: 0;
+            }
+            .mobile-menu-btn {
+                display: none;
+            }
+            .btn-group .btn {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Latar Belakang Cairan Abstrak -->
+    <div class="liquid-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Floating Liquid Glass Navbar -->
+    <header>
+        <nav class="navbar">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#project">Project</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" title="Ubah Tema Gelap/Terang">
+                    <i class="ri-sun-line" id="themeIcon"></i>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="ri-menu-4-line"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ================= HOME SECTION ================= -->
+        <section id="home">
+            <div class="hero-grid">
+                <div class="liquid-glass hero-card tilt-card">
+                    <h1 class="hero-title">
+                        Halo, Saya <span class="gradient-text">Atiana Ali Munawar</span>
+                    </h1>
+                    <div class="typewriter-container">
+                        Seorang <span id="typewriter" class="gradient-text"></span><span class="cursor">&nbsp;</span>
+                    </div>
+                    <p class="hero-desc">
+                        Selamat datang di ruang portofolio saya. Saya seorang mahasiswa yang senang belajar hal-hal baru, mulai dari memahami dasar-dasar mekanik kendaraan hingga bereksperimen membuat aplikasi digital melalui pendekatan AI Engineering dan Vibecoding.
+                    </p>
+                    <div class="btn-group">
+                        <a href="#project" class="btn btn-primary">
+                            Lihat Proyek Saya <i class="ri-arrow-right-up-line"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-glass">
+                            Hubungi Saya <i class="ri-chat-3-line"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Bagian Foto Profil Interaktif -->
+                <div class="liquid-glass hero-visual tilt-card">
+                    <div class="avatar-wrapper">
+                        <div class="avatar-orbit"></div>
+                        <div class="avatar-sphere">
+                            <img src="foto-saya.jpeg" alt="Atiana Ali Munawar">
+                        </div>
+                        <img class="avatar-spiderman" src="spiderman.png" alt="Atiana sebagai Spider-Man">
+                    </div>
+                    <h3>Atiana Ali Munawar</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 6px;">
+                        PVTM Student • Vibecoding Learner
+                    </p>
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <h4>S1 PVTM</h4>
+                            <p>Pendidikan</p>
+                        </div>
+                        <div class="stat-box">
+                            <h4>Pemula</h4>
+                            <p>AI & Vibecoding</p>
+                        </div>
+                        <div class="stat-box">
+                            <h4>Dasar</h4>
+                            <p>Mekanik Kendaraan</p>
+                        </div>
+                        <div class="stat-box">
+                            <h4>3 Karya</h4>
+                            <p>Proyek Mandiri</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ABOUT SECTION ================= -->
+        <section id="about">
+            <div class="section-header">
+                <span class="section-badge">Perkenalan Diri</span>
+                <h2 class="section-title">Tentang <span class="gradient-text">Saya</span></h2>
+            </div>
+
+            <div class="bento-grid">
+                <div class="liquid-glass bento-item bento-wide tilt-card">
+                    <div class="bento-icon"><i class="ri-graduation-cap-line"></i></div>
+                    <h3>Latar Belakang Pendidikan</h3>
+                    <p>
+                        Perkenalkan, nama saya <strong>Atiana Ali Munawar</strong>. Saat ini saya sedang menempuh pendidikan jenjang S1 pada program studi <strong>Pendidikan Vokasional Teknik Mesin</strong>. Melalui perkuliahan ini, saya terus belajar membangun fondasi pengetahuan di bidang keteknikan dan kejuruan secara bertahap.
+                    </p>
+                    <div class="about-tags">
+                        <span class="about-tag"><i class="ri-book-read-line"></i> Untirta</span>
+                        <span class="about-tag"><i class="ri-tools-fill"></i> Teknik Mesin</span>
+                        <span class="about-tag"><i class="ri-award-line"></i> S1 Pendidikan</span>
+                    </div>
+                </div>
+
+                <div class="liquid-glass bento-item tilt-card">
+                    <div class="bento-icon"><i class="ri-sparkling-2-line"></i></div>
+                    <h3>Eksplorasi Vibecoding</h3>
+                    <p>
+                        Sebagai seorang pemula di dunia <em>AI Engineering</em> dan <em>Vibecoding</em>, saya antusias memanfaatkan bantuan teknologi AI untuk mewujudkan ide-ide sederhana menjadi aplikasi yang fungsional.
+                    </p>
+                    <div class="about-tags">
+                        <span class="about-tag"><i class="ri-cpu-line"></i> AI Prompting</span>
+                        <span class="about-tag"><i class="ri-code-s-slash-line"></i> Fast Prototyping</span>
+                    </div>
+                </div>
+
+                <div class="liquid-glass bento-item tilt-card">
+                    <div class="bento-icon"><i class="ri-tools-line"></i></div>
+                    <h3>Minat Mekanik</h3>
+                    <p>
+                        Sejalan dengan jurusan kuliah yang saya tempuh, saya memiliki sedikit pengetahuan dasar mengenai perawatan dan perbaikan ringan pada kendaraan atau mekanik.
+                    </p>
+                    <div class="about-tags">
+                        <span class="about-tag"><i class="ri-car-line"></i> Maintenance Otomotif</span>
+                        <span class="about-tag"><i class="ri-settings-4-line"></i> Service Ringan</span>
+                    </div>
+                </div>
+
+                <div class="liquid-glass bento-item bento-wide tilt-card">
+                    <div class="bento-icon"><i class="ri-compass-3-line"></i></div>
+                    <h3>Semangat Belajar & Berkarya</h3>
+                    <p>
+                        Meskipun masih berada di tahap awal pembelajaran, saya percaya bahwa setiap karya kecil adalah langkah penting untuk berkembang. Saya senang mencoba hal-hal baru, baik itu merancang aplikasi web, aplikasi mobile sederhana, maupun berkreasi membuat Map Roblox menggunakan aplikasi Roblox Studio.
+                    </p>
+                    <div class="about-tags">
+                        <span class="about-tag"><i class="ri-global-line"></i> Web App</span>
+                        <span class="about-tag"><i class="ri-gamepad-line"></i> Roblox Creator</span>
+                        <span class="about-tag"><i class="ri-smartphone-line"></i> Mobile Prototype</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education & Experience -->
+            <div class="edu-exp-grid" style="display:flex;flex-wrap:wrap;gap:24px;margin-top:24px;">
+
+                <!-- Riwayat Sekolah -->
+                <div class="liquid-glass bento-item tilt-card" style="flex:1 1 300px;">
+                    <div class="bento-icon"><i class="ri-book-open-line"></i></div>
+                    <h3>Riwayat Sekolah</h3>
+                    <div class="timeline-interactive">
+                        <div class="timeline-interactive-item">
+                            <div style="font-weight:600;font-size:0.97rem;">SDN Sukamanah</div>
+                            <div style="color:var(--accent-1);font-size:0.83rem;">2010 – 2017</div>
+                        </div>
+                        <div class="timeline-interactive-item">
+                            <div style="font-weight:600;font-size:0.97rem;">MTsN 2 Serang</div>
+                            <div style="color:var(--accent-1);font-size:0.83rem;">2017 – 2020</div>
+                        </div>
+                        <div class="timeline-interactive-item">
+                            <div style="font-weight:600;font-size:0.97rem;">SMAN 1 Ciomas</div>
+                            <div style="color:var(--accent-1);font-size:0.83rem;">2020 – 2023</div>
+                        </div>
+                        <div class="timeline-interactive-item">
+                            <div style="font-weight:600;font-size:0.97rem;">Pendidikan Vokasional Teknik Mesin, Untirta</div>
+                            <div style="color:var(--accent-1);font-size:0.83rem;">2023 – Sekarang</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pengalaman -->
+                <div class="liquid-glass bento-item tilt-card" style="flex:1 1 300px;">
+                    <div class="bento-icon"><i class="ri-briefcase-line"></i></div>
+                    <h3>Pengalaman</h3>
+                    <div class="timeline-interactive">
+                        <div class="timeline-interactive-item">
+                            <div style="font-weight:600;font-size:0.97rem;">Bengkel Tunas Toyota</div>
+                            <div style="color:var(--accent-1);font-size:0.83rem;margin-bottom:4px;">Magang 1 Bulan</div>
+                            <div style="color:var(--text-secondary);font-size:0.85rem;line-height:1.5;">Pengalaman praktik kerja lapangan dalam perawatan dan perbaikan ringan kendaraan.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SKILLS SECTION ================= -->
+        <section id="skills">
+            <div class="section-header">
+                <span class="section-badge">Kemampuan</span>
+                <h2 class="section-title">Keahlian <span class="gradient-text">Saat Ini</span></h2>
+            </div>
+
+            <div class="skills-container">
+                <div class="liquid-glass skill-category tilt-card">
+                    <h3><i class="ri-robot-2-line" style="color: var(--accent-1);"></i> AI Engineering / Vibecoding (Pemula)</h3>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Pemanfaatan AI untuk Pembuatan Aplikasi (Vibecoding)</span><span>Pemula</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="45%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Penyusunan Prompt & Eksplorasi Ide Digital</span><span>Pemula</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="50%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Pengembangan Proyek Web & Aplikasi Sederhana</span><span>Pemula</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="45%"></div></div>
+                    </div>
+                </div>
+
+                <div class="liquid-glass skill-category tilt-card">
+                    <h3><i class="ri-settings-4-line" style="color: var(--accent-2);"></i> Mekanik & Perbaikan Kendaraan</h3>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Pengetahuan Dasar Perbaikan Kendaraan</span><span>Dasar</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="40%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Pemahaman Dasar Komponen & Perawatan</span><span>Dasar</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="45%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Pembelajaran Teknik Mesin Vokasi</span><span>Sedang Ditempuh</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="50%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PROJECT SECTION ================= -->
+        <section id="project">
+            <div class="section-header">
+                <span class="section-badge">Portofolio</span>
+                <h2 class="section-title">Karya & <span class="gradient-text">Sertifikat</span></h2>
+            </div>
+
+            <div class="porto-tabs">
+                <button class="porto-tab-btn active" data-panel="panel-project">Project</button>
+                <button class="porto-tab-btn" data-panel="panel-sertifikat">Sertifikat</button>
+            </div>
+
+            <!-- Panel Proyek (Default Active) -->
+            <div id="panel-project" class="porto-tab-panel active">
+                <div class="projects-grid">
+                    <div class="liquid-glass project-card tilt-card" data-category="web">
+                        <div>
+                            <div class="project-thumb" style="background: linear-gradient(135deg, #0284c7, #6366f1);">
+                                <img src="Presensi.png" alt="Web App Presensi Sekolah" style="width:100%;height:100%;object-fit:cover;border-radius:16px;">
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">Web App</span>
+                                <span class="tag">Vibecoding</span>
+                            </div>
+                            <h3>Web App Presensi Sekolah</h3>
+                            <p>Aplikasi berbasis web dan aplikasi sederhana yang saya buat untuk membantu pencatatan dan pengelolaan kehadiran atau presensi di lingkungan sekolah secara digital.</p>
+                        </div>
+                        <a href="#contact" class="project-link">Tanya Tentang Proyek <i class="ri-arrow-right-line"></i></a>
+                    </div>
+
+                    <div class="liquid-glass project-card tilt-card" data-category="app">
+                        <div>
+                            <div class="project-thumb" style="background: linear-gradient(135deg, #14b8a6, #6366f1);">
+                                <img src="Potretku.jpeg" alt="Potretku Aplikasi Foto Timemark" style="width:100%;height:100%;object-fit:cover;border-radius:16px;">
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">Aplikasi Foto</span>
+                                <span class="tag">Timemark</span>
+                            </div>
+                            <h3>Potretku (Aplikasi Foto Timemark)</h3>
+                            <p>Aplikasi dokumentasi foto bernama "Potretku" yang dilengkapi fitur penanda waktu (timemark) otomatis pada hasil jepretan gambar.</p>
+                        </div>
+                        <a href="#contact" class="project-link">Tanya Tentang Proyek <i class="ri-arrow-right-line"></i></a>
+                    </div>
+
+                    <div class="liquid-glass project-card tilt-card" data-category="game">
+                        <div>
+                            <div class="project-thumb" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">
+                                <img src="Map Roblox.png" alt="Map Game Roblox" style="width:100%;height:100%;object-fit:cover;border-radius:16px;">
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">Roblox</span>
+                                <span class="tag">Map Building</span>
+                            </div>
+                            <h3>Map Game Roblox</h3>
+                            <p>Proyek kreatif di mana saya pernah merancang dan menyusun tata letak lingkungan (map) permainan di dalam platform game Roblox.</p>
+                        </div>
+                        <a href="#contact" class="project-link">Tanya Tentang Proyek <i class="ri-arrow-right-line"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Sertifikat -->
+            <div id="panel-sertifikat" class="porto-tab-panel">
+                <div class="projects-grid">
+                    <div class="liquid-glass project-card tilt-card">
+                        <div>
+                            <div class="project-thumb" style="background: linear-gradient(135deg, #f59e0b, #ec4899); cursor: pointer;" onclick="openCertModal('Sertifikat pi toyota.jpeg')">
+                                <img src="Sertifikat pi toyota.jpeg" alt="Sertifikat Magang Toyota" style="width:100%;height:100%;object-fit:cover;border-radius:16px;">
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">Magang</span>
+                                <span class="tag">Toyota</span>
+                            </div>
+                            <h3>Sertifikat Magang Bengkel Toyota</h3>
+                            <p>Sertifikat resmi penyelesaian program magang 1 bulan di Bengkel Tunas Toyota dalam bidang perbaikan &amp; perawatan kendaraan.</p>
+                        </div>
+                        <button onclick="openCertModal('Sertifikat pi toyota.jpeg')" class="project-link" style="background:none;border:none;cursor:pointer;font-family:inherit;padding:0;">
+                            Lihat Sertifikat <i class="ri-external-link-line"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Modal Sertifikat -->
+        <div id="certModal" class="cert-modal" onclick="if(event.target===this)this.classList.remove('open')">
+            <span style="position:absolute;top:24px;right:32px;font-size:2rem;color:#fff;cursor:pointer;background:rgba(255,255,255,0.15);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;" onclick="document.getElementById('certModal').classList.remove('open')">&times;</span>
+            <img src="" alt="Sertifikat" id="certModalImg">
+        </div>
+
+        <!-- ================= CONTACT SECTION ================= -->
+        <section id="contact">
+            <div class="section-header">
+                <span class="section-badge">Koneksi</span>
+                <h2 class="section-title">Hubungi <span class="gradient-text">Saya</span></h2>
+            </div>
+
+            <div class="contact-wrapper">
+                <div class="liquid-glass contact-info tilt-card">
+                    <h3>Mari Terhubung!</h3>
+                    <p style="color: var(--text-secondary); margin-top: 10px; line-height: 1.6;">
+                        Terima kasih telah mengunjungi web perkenalan diri saya. Jika Anda ingin menyapa, bertukar pengalaman seputar perkuliahan, mekanik, ataupun belajar vibecoding bersama, silakan hubungi saya melalui kontak berikut:
+                    </p>
+
+                    <div class="contact-list">
+                        <a href="https://www.instagram.com/athianalialmunawar_/" target="_blank" rel="noopener noreferrer" class="contact-item" style="text-decoration:none;color:inherit;">
+                            <div class="contact-icon"><i class="ri-instagram-line"></i></div>
+                            <div>
+                                <h4 style="font-size: 0.95rem;">Instagram</h4>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem;">@athianalialmunawar_</p>
+                            </div>
+                        </a>
+                        <a href="https://github.com/Atian52" target="_blank" rel="noopener noreferrer" class="contact-item" style="text-decoration:none;color:inherit;">
+                            <div class="contact-icon"><i class="ri-github-fill"></i></div>
+                            <div>
+                                <h4 style="font-size: 0.95rem;">GitHub</h4>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem;">github.com/Atian52</p>
+                            </div>
+                        </a>
+                        <a href="mailto:atianaalimunawar0@gmail.com" class="contact-item" style="text-decoration:none;color:inherit;">
+                            <div class="contact-icon"><i class="ri-mail-send-line"></i></div>
+                            <div>
+                                <h4 style="font-size: 0.95rem;">Email</h4>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem;">atianaalimunawar0@gmail.com</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <form class="liquid-glass contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" class="glass-input" placeholder="Masukkan nama Anda..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Alamat Email</label>
+                        <input type="email" id="email" class="glass-input" placeholder="nama@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Pesan</label>
+                        <textarea id="message" class="glass-input" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        Kirim Pesan <i class="ri-send-plane-fill"></i>
+                    </button>
+                    <p id="formFeedback" style="margin-top: 14px; font-size: 0.9rem; text-align: center; color: #10b981; display: none;">
+                        ✨ Pesan berhasil disimulasikan terkirim! Terima kasih telah menghubungi.
+                    </p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 <strong>Atiana Ali Munawar</strong> • Portofolio</p>
+    </footer>
+
+    <!-- ==========================================
+         JAVASCRIPT INTERACTIVITY ENGINE
+         ========================================== -->
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const rootElement = document.documentElement;
+
+        const savedTheme = localStorage.getItem('liquid-theme') || 'dark';
+        rootElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = rootElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            rootElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('liquid-theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line';
+            } else {
+                themeIcon.className = 'ri-moon-clear-line';
+            }
+        }
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+
+        const words = [
+            "Mahasiswa S1 Pendidikan Vokasional Teknik Mesin.",
+            "Pemula di Bidang AI Engineering & Vibecoding.",
+            "Pembelajar Dasar Perbaikan & Perawatan Kendaraan."
+        ];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterEl = document.getElementById('typewriter');
+
+        function typeEffect() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                typewriterEl.textContent = currentWord.substring(0, charIndex--);
+            } else {
+                typewriterEl.textContent = currentWord.substring(0, charIndex++);
+            }
+
+            let speed = isDeleting ? 45 : 90;
+
+            if (!isDeleting && charIndex === currentWord.length + 1) {
+                speed = 1800;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                speed = 400;
+            }
+            setTimeout(typeEffect, speed);
+        }
+        typeEffect();
+
+        const isDesktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        if (isDesktopPointer) {
+            const glassCards = document.querySelectorAll('.liquid-glass');
+
+            glassCards.forEach(card => {
+                let rafId = null;
+
+                card.addEventListener('mousemove', (e) => {
+                    if (rafId) cancelAnimationFrame(rafId);
+
+                    rafId = requestAnimationFrame(() => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+
+                        card.style.setProperty('--mouse-x', `${x}px`);
+                        card.style.setProperty('--mouse-y', `${y}px`);
+
+                        if (card.classList.contains('tilt-card') && window.innerWidth > 900) {
+                            const centerX = rect.width / 2;
+                            const centerY = rect.height / 2;
+                            const rotateX = ((y - centerY) / centerY) * -5;
+                            const rotateY = ((x - centerX) / centerX) * 5;
+                            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate3d(0, -4px, 0)`;
+                        }
+                    });
+                }, { passive: true });
+
+                card.addEventListener('mouseleave', () => {
+                    if (rafId) cancelAnimationFrame(rafId);
+                    card.style.transform = 'translate3d(0, 0, 0)';
+                });
+            });
+        }
+
+        const revealElements = document.querySelectorAll('main section > *:not(.porto-tab-panel), main section .bento-item, main section .skill-item, main section .contact-item, main section .form-group, main section .porto-tabs, main section .project-card, main section .cert-card, main section .filter-btn');
+        revealElements.forEach((element, index) => {
+            element.classList.add('reveal');
+            element.style.setProperty('--reveal-delay', `${(index % 6) * 70}ms`);
+            if (index % 3 === 1) element.classList.add('reveal-left');
+            else if (index % 3 === 2) element.classList.add('reveal-right');
+        });
+
+        const revealObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.target.classList.contains('porto-tab-panel')) {
+                    entry.target.classList.toggle('active', entry.isIntersecting);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealElements.forEach(element => revealObserver.observe(element));
+
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-links a');
+        const skillBars = document.querySelectorAll('.skill-progress');
+
+        const observerOptions = {
+            threshold: 0.2
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navItems.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                    });
+
+                    if (id === 'skills') {
+                        skillBars.forEach(bar => {
+                            bar.style.width = bar.getAttribute('data-width');
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(sec => sectionObserver.observe(sec));
+
+        // Porto Tabs (Project & Sertifikat)
+       
+        document.querySelectorAll('.porto-tab-panel').forEach(panel => {
+            panel.classList.toggle('active', panel.id === 'panel-project');
+        });
+        document.querySelectorAll('.porto-tab-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.panel === 'panel-project');
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.porto-tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.porto-tab-panel').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                const target = document.getElementById(btn.dataset.panel);
+                if (target) {
+                    target.classList.add('active');
+                    target.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+                }
+            });
+        });
+
+        window.openCertModal = function(src) {
+            document.getElementById('certModalImg').src = src;
+            document.getElementById('certModal').classList.add('open');
+        };
+
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    if (filterValue === 'all' || filterValue === category) {
+                        card.classList.remove('hide');
+                    } else {
+                        card.classList.add('hide');
+                    }
+                });
+            });
+        });
+
+        const contactForm = document.getElementById('contactForm');
+        const formFeedback = document.getElementById('formFeedback');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            formFeedback.style.display = 'block';
+            contactForm.reset();
+            setTimeout(() => {
+                formFeedback.style.display = 'none';
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
